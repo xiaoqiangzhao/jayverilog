@@ -1,0 +1,12 @@
+## template for module 
+## Date   : 02.23.2017
+## Author : Jay Zhao 
+## Email  : jay.zhao@nxp.com
+
+
+module {{ module.name }} (
+{%for p in module.port%}  {%if p.port.length > 1 %}{{" %8s%10s%15s"|format(p.port.dir, '['~p.port.end~':'~p.port.start~']', p.port.name)}}{%else%}{{" %8s%10s%15s"|format(p.port.dir,"",p.port.name)}}{%endif%}{%if not loop.last%},{%endif%} {%if p.port.comment%} // {{p.port.comment}} {%endif%}
+{%endfor%});
+{%for p in module.port%}  {%if p.port.length > 1 %}{{" %8s%10s%15s"|format(p.port.type, '['~p.port.end~':'~p.port.start~']', p.port.name)}}{%else%}{{" %8s%10s%15s"|format(p.port.type,"",p.port.name)}}{%endif%};
+{%endfor%});
+endmodule
